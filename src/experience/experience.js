@@ -1,29 +1,18 @@
-import React, { useState } from 'react';
-import THREE, { Scene } from 'three';
+import React, { useState, useEffect } from 'react';
+import { Canvas } from '@react-three/fiber'
 
-const Experience = () => {
-    const [display, setDisplay] = useState();
+import Floor from './floor.js';
 
-    if(checkCompat){
-
-    } else {
-        setDisplay("WebGL Not Working")
-    }
-
-    const scene = new Scene();
-
+const Experience = (props) => {
     return (
-        <div id="experience-window">{display}</div>
+        <div id="experience-window">
+            <Canvas>
+                <ambientLight />
+                <pointLight position={[10, 10, 10]} />
+                <Floor />
+            </Canvas>
+        </div>
     );
 };
 
 export default Experience;
-
-const checkCompat = () => {
-    if ( WEBGL.isWebGLAvailable() ) {
-        return true;
-    } else {
-        const warning = WEBGL.getWebGLErrorMessage();
-        return false;
-    };
-};

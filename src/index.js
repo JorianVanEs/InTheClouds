@@ -8,11 +8,11 @@ import Experience from './experience/experience.js';
 const App = () => {
 
     return (
-        <main>
+        <div id="app">
             <header> InTheCloud(s)</header>
             <Experience />
             <footer></footer>
-        </main>
+        </div>
     )
 };
 
