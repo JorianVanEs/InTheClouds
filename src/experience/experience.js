@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Canvas } from '@react-three/fiber'
+import React from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 
 import Floor from './floor.js';
 
@@ -7,6 +8,7 @@ const Experience = (props) => {
     return (
         <div id="experience-window">
             <Canvas>
+                <OrbitControls />
                 <ambientLight />
                 <pointLight position={[10, 10, 10]} />
                 <Floor />
