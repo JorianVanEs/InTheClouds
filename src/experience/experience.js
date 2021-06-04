@@ -8,13 +8,13 @@ import { Plane, Box, Sphere } from './objects.js';
 const Experience = (props) => {
     return (
         <div id="experience-window">
-            <Canvas>
+            <Canvas camera={{position: [-5, 10, 5], fov: 70}} shadowMap>
                 <OrbitControls />
                 <Stars radius={200} />
-                <ambientLight />
-                <pointLight position={[5, 10, 10]} />
+                <ambientLight intensity={0.1} />
+                <directionalLight position={[0, 10, 0]} intensity={0.6} castShadow />
                 <Physics>
-                    <Box />
+                    <Box  />
                     <Sphere />
                     <Plane />
                 </Physics>
