@@ -10,9 +10,8 @@ const Experience = (props) => {
     return (
         <div id="experience-window">
             <Canvas camera={{position: [-5, 10, 5], fov: 70}} shadows>
-                <OrbitControls />
                 <Stars radius={200} />
-                {/* <ambientLight intensity={0.1} /> */}
+                <ambientLight intensity={0.1} />
                 <directionalLight position={[10, 10, 10]} intensity={0.6} castShadow />
                 <Physics>
                     <Plane />

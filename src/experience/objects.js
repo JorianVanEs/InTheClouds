@@ -4,7 +4,7 @@ import { Physics, useBox, usePlane, useSphere } from '@react-three/cannon';
 const Plane = () => { 
   const [ref] = usePlane(() => ({
     position: [0,2,0],
-    rotation: [-Math.PI / 2.04, 0, 0]
+    rotation: [-Math.PI / 2, 0, 0]
   }));
 
   return (
