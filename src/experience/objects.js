@@ -29,7 +29,7 @@ const Box = () => {
       castShadow
       receiveShadow>
       <boxGeometry attach="geometry" args={[1, 1, 1]} />
-      <meshStandardMaterial attach="material" color="blue" />
+      <meshStandardMaterial attach="material" color="grey" />
     </mesh>
   )
 }
@@ -46,7 +46,7 @@ const Sphere = () => {
       castShadow
       receiveShadow>
       <sphereGeometry attach="geometry" args={[1, 20, 20]} />
-      <meshStandardMaterial attach="material" color="red" />
+      <meshStandardMaterial attach="material" color="grey" />
     </mesh>
   )
 }

@@ -11,8 +11,8 @@ const Player = () => {
     return (
       <mesh
         ref={ref}>
-        <cylinderBufferGeometry args={[0.5, 0.5, 1]} />
-        <meshStandardMaterial color="white" />
+        <cylinderBufferGeometry args={[0.5, 0.5, 1, 50]} />
+        <meshStandardMaterial color="red" />
       </mesh>
     )
 }
