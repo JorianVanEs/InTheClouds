@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { PositionalAudio } from '@react-three/drei';
 import {Physics, useBox, usePlane, useSphere } from '@react-three/cannon';
+
+import AlongTheRoad from './alongtheroad.mp3';
 
 const Plane = () => { 
   const [ref] = usePlane(() => ({
@@ -24,18 +27,29 @@ const Box = () => {
     position: [-2, 5, 0]
   }));
 
-  const audio = new Audio();
-  audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3';
+  const audio = useRef();
+
+  const optionsAudio = {
+    url: AlongTheRoad,
+    distance: 0.8,
+    autoplay: false,
+    loop: false
+  };
+
+  useEffect(() => {
+    audio.current.stop();
+  });
 
   return (
     <mesh
       ref={ref}
-      onPointerOver={() => audio.play()}
-      onPointerOut={() => audio.pause()}
+      onPointerOver={() => audio.current.play()}
+      onPointerOut={() => audio.current.pause()}
       castShadow
       receiveShadow>
       <boxGeometry attach="geometry" args={[1, 1, 1]} />
       <meshStandardMaterial attach="material" color="grey" />
+      <PositionalAudio ref={audio} {...optionsAudio} />
     </mesh>
   )
 }
