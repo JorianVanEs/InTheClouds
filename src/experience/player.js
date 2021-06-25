@@ -1,38 +1,36 @@
 import React, { useRef, useState } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { extend, useThree, useFrame } from '@react-three/fiber';
 import { useCylinder } from '@react-three/cannon';
-import { PerspectiveCamera } from '@react-three/drei';
+import { PerspectiveCamera, PointerLockControls as PointerControls} from '@react-three/drei';
+
+extend({ PointerControls })
 
 const Player = (props) => {
-    const playerOptions = {
-      fov: 70,
-      position: [0, 3, 0],
-      rotation: [0, Math.PI / 2, 0],
-      makeDefault: true
-    }
+    const { camera, gl } = useThree();
+    const controls = useRef();
 
-    const player = useRef();
-
-    const [ref] = useCylinder(() => ({
-        mass: 2,
-        position: [0,0,0],
+    const [player] = useCylinder(() => ({
+        mass: 0,
+        position: [0,3,0],
         status: "Dynamic"
     }));
 
-    useFrame((_, delta) => {
-      console.log("Hey, I'm executing every frame!");
+    useFrame(() => {
+      camera.position.copy(player.current.position);  
+
+      document.addEventListener('click', () => {
+        controls.current.lock();
+      })
     });
   
     return (
-      <PerspectiveCamera
-        {...playerOptions}
-        ref={player}>
+      <>
+        <PointerControls ref={controls} args={[camera, gl.domElement]} />
         <mesh
-          ref={ref}>
-          <cylinderBufferGeometry args={[0.5, 0.5, 1, 50]} />
+          ref={player}>
           <meshStandardMaterial color="red" />
         </mesh>
-      </PerspectiveCamera>
+      </>
     )
 }
 

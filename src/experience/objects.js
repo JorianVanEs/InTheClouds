@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { Physics, useBox, usePlane, useSphere } from '@react-three/cannon';
+import React from 'react';
+import { useFrame } from '@react-three/fiber';
+import {Physics, useBox, usePlane, useSphere } from '@react-three/cannon';
 
 const Plane = () => { 
   const [ref] = usePlane(() => ({
@@ -23,9 +24,14 @@ const Box = () => {
     position: [-2, 5, 0]
   }));
 
+  const audio = new Audio();
+  audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3';
+
   return (
     <mesh
-      ref={ref} 
+      ref={ref}
+      onPointerOver={() => audio.play()}
+      onPointerOut={() => audio.pause()}
       castShadow
       receiveShadow>
       <boxGeometry attach="geometry" args={[1, 1, 1]} />
