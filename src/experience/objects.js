@@ -31,7 +31,6 @@ const Box = () => {
 
   const optionsAudio = {
     url: AlongTheRoad,
-    distance: 1,
     autoplay: false,
     loop: false
   };
