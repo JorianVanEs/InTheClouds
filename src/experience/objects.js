@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
 import { PositionalAudio } from '@react-three/drei';
-import {Physics, useBox, usePlane, useSphere } from '@react-three/cannon';
+import { useBox, usePlane, useSphere } from '@react-three/cannon';
 
 import AlongTheRoad from './alongtheroad.mp3';
 
@@ -23,7 +22,6 @@ const Plane = () => {
 
 const Box = () => {
   const [ref] = useBox(() => ({
-    mass : 3,
     position: [-5, 5, 0]
   }));
 
@@ -40,23 +38,25 @@ const Box = () => {
   });
 
   return (
-    <mesh
-      ref={ref}
-      onPointerOver={() => audio.current.play()}
-      onPointerOut={() => audio.current.pause()}
-      castShadow
-      receiveShadow>
-      <boxGeometry attach="geometry" args={[1, 1, 1]} />
-      <meshStandardMaterial attach="material" color="grey" />
+    <group>
+      <mesh
+        ref={ref}
+        onPointerOver={() => audio.current.play()}
+        onPointerOut={() => audio.current.pause()}
+        castShadow
+        receiveShadow>
+        <boxGeometry attach="geometry" />
+        <meshStandardMaterial attach="material" color="grey" />
+      </mesh>
       <PositionalAudio ref={audio} {...optionsAudio} />
-    </mesh>
+    </group>
   )
 }
 
 const Sphere = () => {
   const [ref] = useSphere(() => ({
-    mass: 3,
-    position: [3, 5, 0]
+    mass: 10,
+    position: [3, 10, 0]
   }));
 
   return (
@@ -64,7 +64,7 @@ const Sphere = () => {
       ref={ref}
       castShadow
       receiveShadow>
-      <sphereGeometry attach="geometry" args={[1, 20, 20]} />
+      <sphereGeometry attach="geometry" args={[0.6, 20, 20]} />
       <meshStandardMaterial attach="material" color="grey" />
     </mesh>
   )

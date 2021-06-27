@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { extend, useThree, useFrame } from '@react-three/fiber';
 import { useSphere } from '@react-three/cannon';
 import { PointerLockControls as PointerControls} from '@react-three/drei';
-import { Vector3 } from 'three';
+import { Vector3, CircleGeometry, MeshBasicMaterial, Mesh } from 'three';
 
 extend({ PointerControls });
 
@@ -19,8 +19,15 @@ const keyBindsActions= (key) => {
 const speed = 5;
 
 const Player = (props) => {
-    const { camera, gl } = useThree();
+    const { camera, gl, scene } = useThree();
     const controls = useRef();
+
+    const circle = new CircleGeometry(0.003, 32);
+    const circleMat = new MeshBasicMaterial({color: 0xffffff});
+    const dot = new Mesh(circle, circleMat);
+    scene.add(camera);
+    camera.add(dot);
+    dot.position.set(0, 0, -1);
 
     const [player, api] = useSphere(() => ({
         mass: 100,
