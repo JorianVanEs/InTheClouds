@@ -23,8 +23,8 @@ const Player = () => {
     const controls = useRef();
 
     const [player, api] = useCylinder(() => ({
-        position: [0,2.5,0],
-        mass: 10
+        position: [0,5,0],
+        mass: 1
     }));
 
     const [movement, setMovement] = useState({
@@ -62,19 +62,18 @@ const Player = () => {
     }, [api.velocity]);
 
     useFrame(() => {
-      // camera.position.copy(player.current.position);  
+      camera.position.copy(player.current.position);  
 
       document.addEventListener('click', () => {
         controls.current.lock();
       });
 
       const direction = new Vector3();
-      const xVector = new Vector3(movement.moveForward ? 1 : 0 - (movement.moveBackwards ? 1 : 0), 0, 0);
-      const zVector = new Vector3(0, 0, movement.moveLeft ? 1 : 0 - (movement.moveRight ? 1 : 0));
+      const xVector = new Vector3(movement.moveLeft ? 1 : 0 - (movement.moveRight ? 1 : 0), 0, 0);
+      const zVector = new Vector3(0, 0, movement.moveForward ? 1 : 0 - (movement.moveBackwards ? 1 : 0));
+      console.log(camera.rotation)
       direction.subVectors(xVector, zVector).normalize().multiplyScalar(speed).applyEuler(camera.rotation);
       api.velocity.set(direction.x, velocity.current[1], direction.z);
-
-      // console.log(direction);
 
     });
   
