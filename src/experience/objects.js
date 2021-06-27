@@ -24,14 +24,14 @@ const Plane = () => {
 const Box = () => {
   const [ref] = useBox(() => ({
     mass : 3,
-    position: [-2, 5, 0]
+    position: [-5, 5, 0]
   }));
 
   const audio = useRef();
 
   const optionsAudio = {
     url: AlongTheRoad,
-    distance: 0.8,
+    distance: 1,
     autoplay: false,
     loop: false
   };
