@@ -9,13 +9,13 @@ import { Player } from './player.js';
 const Experience = (props) => {
     return (
         <div id="experience-window">
-            <Canvas shadows>
+            <Canvas shadows sRBG>
                 <Stars radius={200} />
                 <ambientLight intensity={0.1} />
                 <directionalLight position={[10, 10, 10]} intensity={0.6} castShadow />
-                <Physics>
+                <Physics gravity={[0, -30, 0]}>
                     <Plane />
-                    <Player />
+                    <Player position={[0,5,0]} />
                     <Box  />
                     <Sphere />
                 </Physics>

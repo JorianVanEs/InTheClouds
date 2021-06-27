@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { extend, useThree, useFrame } from '@react-three/fiber';
-import { useCylinder } from '@react-three/cannon';
+import { useSphere } from '@react-three/cannon';
 import { PointerLockControls as PointerControls} from '@react-three/drei';
 import { Vector3 } from 'three';
 
@@ -18,13 +18,13 @@ const keyBindsActions= (key) => {
 
 const speed = 5;
 
-const Player = () => {
+const Player = (props) => {
     const { camera, gl } = useThree();
     const controls = useRef();
 
-    const [player, api] = useCylinder(() => ({
-        position: [0,5,0],
-        mass: 1
+    const [player, api] = useSphere(() => ({
+        mass: 100,
+        ...props
     }));
 
     const [movement, setMovement] = useState({
@@ -53,7 +53,7 @@ const Player = () => {
       }
     })
 
-    const velocity = useRef([0,0,0]);
+    const velocity = useRef([0,1,0]);
 
     useEffect(() => {
       api.velocity.subscribe((vel) => {
@@ -62,25 +62,24 @@ const Player = () => {
     }, [api.velocity]);
 
     useFrame(() => {
-      camera.position.copy(player.current.position);  
+      camera.position.copy(player.current.position);   
 
       document.addEventListener('click', () => {
         controls.current.lock();
       });
 
       const direction = new Vector3();
-      const xVector = new Vector3(movement.moveLeft ? 1 : 0 - (movement.moveRight ? 1 : 0), 0, 0);
+      const xVector = new Vector3(movement.moveRight ? 1 : 0 - (movement.moveLeft ? 1 : 0), 0, 0);
       const zVector = new Vector3(0, 0, movement.moveForward ? 1 : 0 - (movement.moveBackwards ? 1 : 0));
-      console.log(camera.rotation)
       direction.subVectors(xVector, zVector).normalize().multiplyScalar(speed).applyEuler(camera.rotation);
       api.velocity.set(direction.x, velocity.current[1], direction.z);
 
     });
   
     return (
-        <mesh 
+        <mesh
           ref={player}>
-          <cylinderBufferGeometry args={[0.5, 0.5, 1, 50]} />
+          <sphereBufferGeometry args={[1, 1, 1, 100]} />
           <meshStandardMaterial color="red" />
           <PointerControls ref={controls} args={[camera, gl.domElement]} />
         </mesh>
