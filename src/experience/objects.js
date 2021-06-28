@@ -7,6 +7,7 @@ import { TextureLoader, RepeatWrapping } from 'three';
 import AlongTheRoad from './alongtheroad.mp3';
 import Tiles from './tiles.jpg';
 import Ball from './ball.jpg';
+import Brick from './brick.jpg';
 
 const Plane = () => { 
   const [ref] = usePlane(() => ({
@@ -19,7 +20,7 @@ const Plane = () => {
   const texture = useLoader(TextureLoader, Tiles);
   texture.wrapS = RepeatWrapping;
   texture.wrapT = RepeatWrapping;
-  texture.repeat.set(10, 10)
+  texture.repeat.set(10, 10);
 
   return (
     <mesh
@@ -40,11 +41,16 @@ const Wall = (props) => {
     ...props
   }));
 
+  const texture = useLoader(TextureLoader, Brick);
+  texture.wrapS = RepeatWrapping;
+  texture.wrapT = RepeatWrapping;
+  texture.repeat.set(14, 1);
+
   return (
     <mesh
       ref={ref}>
       <boxGeometry attach="geometry" args={dimentions} />
-      <meshStandardMaterial attach="material" />
+      <meshStandardMaterial attach="material" map={texture} toneMapped={false}  />
     </mesh>
   )
 }

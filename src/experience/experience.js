@@ -6,6 +6,7 @@ import { Physics } from '@react-three/cannon';
 import { Plane, Wall, Box, FootBall, Star } from './objects.js';
 import { Player } from './player.js';
 import { Skybox } from './skybox.js';
+import { Instructions } from './text.js';
 
 const Experience = (props) => {
     return (
@@ -22,6 +23,7 @@ const Experience = (props) => {
                     <Wall rotation={[0, -Math.PI / 2, 0]} position={[-10, 5.5, 0]} />
                     <Wall rotation={[0, -Math.PI / 2, 0]} position={[10, 5.5, 0]} />
                     <Player position={[0,5,0]} />
+                    <Instructions position={[-12,10,-20]} />
                     <Box  />
                     <FootBall    />
                     <Star position={[0, 50, -50]} />
