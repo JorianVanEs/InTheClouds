@@ -27,7 +27,7 @@ const Player = (props) => {
         ...props
     }));
 
-    const circle = new CircleGeometry(0.003, 32);
+    const circle = new CircleGeometry(0.007, 32);
     const circleMat = new MeshBasicMaterial({color: 0xffffff});
     const dot = new Mesh(circle, circleMat);
     scene.add(camera);
@@ -67,6 +67,8 @@ const Player = (props) => {
           velocity.current = vel;
       })
     }, [api.velocity]);
+
+    let isLocked = false;
 
     useFrame(() => {
       camera.position.copy(player.current.position); 

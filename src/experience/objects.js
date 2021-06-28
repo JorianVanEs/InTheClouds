@@ -139,6 +139,6 @@ const Star = (props) => {
       <PositionalAudio ref={audio} {...optionsAudio} />
     </mesh>
   );
-}
+};
 
 export { Plane, Wall, Box, FootBall, Star };
