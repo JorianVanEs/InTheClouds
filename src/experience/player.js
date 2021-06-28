@@ -22,17 +22,17 @@ const Player = (props) => {
     const { camera, gl, scene } = useThree();
     const controls = useRef();
 
+    const [player, api] = useSphere(() => ({
+        mass: 1,
+        ...props
+    }));
+
     const circle = new CircleGeometry(0.003, 32);
     const circleMat = new MeshBasicMaterial({color: 0xffffff});
     const dot = new Mesh(circle, circleMat);
     scene.add(camera);
     camera.add(dot);
     dot.position.set(0, 0, -1);
-
-    const [player, api] = useSphere(() => ({
-        mass: 100,
-        ...props
-    }));
 
     const [movement, setMovement] = useState({
       moveForward: false,
@@ -69,7 +69,7 @@ const Player = (props) => {
     }, [api.velocity]);
 
     useFrame(() => {
-      camera.position.copy(player.current.position);   
+      camera.position.copy(player.current.position); 
 
       document.addEventListener('click', () => {
         controls.current.lock();
@@ -86,8 +86,6 @@ const Player = (props) => {
     return (
         <mesh
           ref={player}>
-          <sphereBufferGeometry args={[1, 1, 1, 100]} />
-          <meshStandardMaterial color="red" />
           <PointerControls ref={controls} args={[camera, gl.domElement]} />
         </mesh>
     )
