@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sky, Stars, useEdgeSplit } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
 
-import { Plane, Wall, Box, FootBall, Star, RedBox } from './objects.js';
+import { Plane, Wall, Box, FootBall, Star } from './objects.js';
 import { Player } from './player.js';
 import { Skybox } from './skybox.js';
 import { Instructions, Questions, Reticle } from './text.js';
@@ -18,17 +18,17 @@ const Experience = (props) => {
                 <directionalLight position={[10, 15, 10]} intensity={0.6} castShadow />
                 <Physics gravity={[0, -30, 0]}>
                     <Plane />
-                    <Wall position={[0, 5.5, 10]} />
-                    <Wall position={[0, 5.5, -10]} />
-                    <Wall rotation={[0, -Math.PI / 2, 0]} position={[-10, 5.5, 0]} />
-                    <Wall rotation={[0, -Math.PI / 2, 0]} position={[10, 5.5, 0]} />
+                    {/* <Wall position={[0, 5.5, 10]} /> */}
+                    {/* <Wall position={[0, 5.5, -10]} /> */}
+                    {/* <Wall rotation={[0, -Math.PI / 2, 0]} position={[-10, 5.5, 0]} /> */}
+                    {/* <Wall rotation={[0, -Math.PI / 2, 0]} position={[10, 5.5, 0]} /> */}
                     <Player position={[0,5,0]} />
-                    <Instructions position={[-12,10,-20]} />
-                    <Questions position={[-4.5, 5, -10]} />
+                    {/* <Instructions position={[-12,10,-20]} /> */}
+                    {/* <Questions position={[-4.5, 5, -10]} /> */}
                     <Reticle position={[-5, 6, -10.2]} />
-                    <Box  />
-                    <FootBall    />
-                    <Star position={[0, 50, -50]} />
+                    {/* <Box  /> */}
+                    <FootBall />
+                    {/* <Star position={[0, 50, -50]} /> */}
                 </Physics>
             </Canvas>
         </div>

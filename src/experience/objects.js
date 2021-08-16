@@ -2,16 +2,15 @@ import React, { useRef, useEffect } from 'react';
 import { useLoader } from '@react-three/fiber';
 import { PositionalAudio } from '@react-three/drei';
 import { useBox, usePlane, useSphere } from '@react-three/cannon';
-import { TextureLoader, RepeatWrapping } from 'three';
+import { TextureLoader, RepeatWrapping, PlaneBufferGeometry, MeshLambertMaterial, Mesh } from 'three';
 
 import AlongTheRoad from './alongtheroad.mp3';
-import Tiles from './tiles.jpg';
-import Ball from './ball.jpg';
-import Brick from './brick.jpg';
+import Tiles from './textures/tiles.jpg';
+import Ball from './textures/ball.jpg';
+import Brick from './textures/brick.jpg';
 
 const Plane = () => { 
   const [ref] = usePlane(() => ({
-    mass: 10,
     type: 'Static',
     position: [0,5,0],
     rotation: [-Math.PI / 2, 0, 0]
