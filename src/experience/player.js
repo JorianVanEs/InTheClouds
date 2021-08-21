@@ -23,8 +23,9 @@ const Player = (props) => {
     const controls = useRef();
 
     const [player, api] = useSphere(() => ({
+        type: 'dynamic',
         mass: 1,
-        ...props
+        ...props,
     }));
 
     const circle = new CircleGeometry(0.007, 32);

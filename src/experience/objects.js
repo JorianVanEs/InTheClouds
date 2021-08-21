@@ -23,8 +23,7 @@ const Plane = () => {
 
   return (
     <mesh
-      ref={ref}
-      receiveShadow>
+      ref={ref}>
       <planeBufferGeometry attach="geometry" args={[20, 20]} />
       <meshStandardMaterial attach="material" map={texture} toneMapped={false} />
     </mesh>
@@ -90,7 +89,8 @@ const Box = () => {
 const FootBall = () => {
   const [ref] = useSphere(() => ({
     mass: 30,
-    position: [5, 15, 0]
+    position: [5, 15, 0],
+    type: 'Dynamic'
   }));
 
   const texture = useLoader(TextureLoader, Ball);

@@ -7,6 +7,7 @@ import { Plane, Wall, Box, FootBall, Star } from './objects.js';
 import { Player } from './player.js';
 import { Skybox } from './skybox.js';
 import { Instructions, Questions, Reticle } from './text.js';
+import { Clouds } from './clouds.js';
 
 const Experience = (props) => {
     return (
@@ -16,8 +17,9 @@ const Experience = (props) => {
                 <Skybox />
                 <ambientLight intensity={0.1} />
                 <directionalLight position={[10, 15, 10]} intensity={0.6} castShadow />
+                <fog attach='fog' args={["white", 0.1, 7]} />
                 <Physics gravity={[0, -30, 0]}>
-                    <Plane />
+                    <Plane />   
                     {/* <Wall position={[0, 5.5, 10]} /> */}
                     {/* <Wall position={[0, 5.5, -10]} /> */}
                     {/* <Wall rotation={[0, -Math.PI / 2, 0]} position={[-10, 5.5, 0]} /> */}
@@ -29,6 +31,7 @@ const Experience = (props) => {
                     {/* <Box  /> */}
                     <FootBall />
                     {/* <Star position={[0, 50, -50]} /> */}
+                    <Clouds />
                 </Physics>
             </Canvas>
         </div>
