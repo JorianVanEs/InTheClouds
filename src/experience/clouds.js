@@ -7,50 +7,29 @@ import Smoke from './textures/smoke.png';
 const Clouds = () => { 
     const mesh = useRef();
 
-    // let loader = new TextureLoader();
-    // loader.load(Smoke, texture => {
-    // cloudGeometry = new PlaneBufferGeometry(1,1);
-    //   material.current.map(texture);
-    // })
-
     const texture = useLoader(TextureLoader, Smoke);
 
     const clouds = [];
 
-    for(let i = 0; i < 10; i++){
-      let rotation = 0;
-
-      useFrame(() => {
-        rotation = -Math.PI / (2 + 1);
-      });
-
-      const cloud = (
-        <mesh
-          ref={mesh}
-          position={[(Math.random() * 20 - 10), 5.3, (Math.random() * 20 - 10)]}
-          rotation={[-Math.PI / 2, 0, rotation]}
-          receiveShadow>
-          <planeBufferGeometry attach="geometry" args={[3, 3]} />
-          <meshStandardMaterial map={texture} transparent opacity={0.9} depthWrite={false} />
-        </mesh>
-      );
+    for(let i = 0; i < 1000; i++){
 
       const createCloud = (key) => {
         const cld = useRef();
 
-        useFrame(() => {
-          cld.current.rotation.z = -Math.PI / (2 + 1);
+        useFrame(({clock}) => {
+          const a = clock.getElapsedTime();
+          cld.current.rotation.z = a * 0.1;
         });
 
         return (
           <mesh
           ref={cld}
-          position={[(Math.random() * 20 - 10), 5.3, (Math.random() * 20 - 10)]}
-          rotation={[-Math.PI / 2, 0, rotation]}
+          position={[(Math.random() * 100 - 50), 5.3, (Math.random() * 100 - 50)]}
+          rotation={[-Math.PI / 2, 0, 0]}
           key={key}
           receiveShadow>
-          <planeBufferGeometry attach="geometry" args={[3, 3]} />
-          <meshStandardMaterial map={texture} transparent opacity={0.9} depthWrite={false} />
+          <planeBufferGeometry attach="geometry" args={[6, 6]} />
+          <meshStandardMaterial map={texture} transparent depthWrite={false} />
         </mesh>
         )
       }

@@ -24,7 +24,7 @@ const Plane = () => {
   return (
     <mesh
       ref={ref}>
-      <planeBufferGeometry attach="geometry" args={[20, 20]} />
+      <planeBufferGeometry attach="geometry" args={[100, 100]} />
       <meshStandardMaterial attach="material" map={texture} toneMapped={false} />
     </mesh>
   )

@@ -17,7 +17,7 @@ const Experience = (props) => {
                 <Skybox />
                 <ambientLight intensity={0.1} />
                 <directionalLight position={[10, 15, 10]} intensity={0.6} castShadow />
-                <fog attach='fog' args={["white", 0.1, 7]} />
+                <fog attach='fog' args={["white", 0.1, 20]} />
                 <Physics gravity={[0, -30, 0]}>
                     <Plane />   
                     {/* <Wall position={[0, 5.5, 10]} /> */}
